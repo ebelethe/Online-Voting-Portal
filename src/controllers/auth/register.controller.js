@@ -4,16 +4,17 @@ import bcrypt from "bcrypt";
 
 export const registerUser=async (req, res)=>{
     try {
-        const {fullName, email, password } =req.body;
+        const { fullName, email, password } = req.body;
         
         //check if user already exist
-        const existingUser=await User.findOne({email});
+        const existingUser=await User.findOne({ email });
         if (existingUser){
-            return 
-            res.status(400).json ({success:false, message:"User already exists"});
+            return res.status(400).json ({
+                success:false, 
+                message:"User already exists"});
         }
         const hashedPassword=await bcrypt.hash(password, 10); //user password
-        const user=await user.creat({fullName, email, password:hashedPassword,});
+        const user=await User.create({fullName, email, password:hashedPassword,});
         res.status(201).json({success:true, message:"Resgistration successful",
             data:user,});
     } catch (error) {
