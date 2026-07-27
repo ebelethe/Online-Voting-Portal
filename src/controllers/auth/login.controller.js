@@ -7,13 +7,15 @@ export const loginUser=async (req,res)=>{
         const {email, password, }=req.body; //find user
         const user=await User.findOne({ email });
             if (!user){
-                return
-                res.status(400).json({success:false, message:"Invalid email or password",});
+                return res.status(400).json({
+                    success:false, 
+                    message:"Invalid email or password",});
             }
     const isMatch=await bcrypt.compare(password, user.password);
     if (!isMatch){
-        return 
-        res.status(400).json({success: false, message:"Invalid email or password",});
+        return res.status(400).json({
+            success: false,
+             message:"Invalid email or password",});
     }
     //Generate jwt
     const token=jwt.sign({ 
@@ -22,10 +24,10 @@ export const loginUser=async (req,res)=>{
     },
     process.env.JWT_SECRET,
     {
-        expiresIn: "id",
+        expiresIn: "1d",
     }
 );
-res.status(500).json ({
+return res.status(200).json ({
     success:true, message:"login successful", token})
 }catch (error) {
     res.status(500).json({success:false, message:error.message})
