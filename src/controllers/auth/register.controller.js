@@ -14,7 +14,12 @@ export const registerUser=async (req, res)=>{
                 message:"User already exists"});
         }
         const hashedPassword=await bcrypt.hash(password, 10); //user password
-        const user=await User.create({fullName, email, password:hashedPassword,});
+        const user=await User.create({
+            fullName, 
+            email, 
+            password:hashedPassword,
+            role:"voter",
+        });
         res.status(201).json({success:true, message:"Resgistration successful",
             data:user,});
     } catch (error) {
