@@ -6,6 +6,7 @@ import adminRoutes from "./routes/admin.routes.js";
 import voterRoutes from "./routes/voter.routes.js";
 import candidateRoutes from "./routes/candidate.routes.js";
 import electionRoutes from "./routes/election.routes.js";
+import partyRoutes from "./routes/party.routes.js";
 
 const app=express();
 
@@ -17,5 +18,6 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/voter", voterRoutes);
 app.use("/api/candidate", candidateRoutes);
 app.use("/api/election", electionRoutes);
+app.use("/api/party", partyRoutes);
 
 export default app;
