@@ -1,36 +1,25 @@
-import Candidate from "../../models/candidate.model.js";
+import { validateCandidate } from "../../modules/candidate/candidateValidator.module.js";
+import { createCandidateService } from "../../modules/candidate/candidateService.module.js";
 
-// Create Candidate
 export const createCandidate = async (req, res) => {
   try {
-    const { fullName, party, position, manifesto, image } = req.body;
+    const validation = validateCandidate(req.body);
 
-    // Check if candidate already exists
-    const existingCandidate = await Candidate.findOne({
-      fullName,
-      position,
-    });
-
-    if (existingCandidate) {
+    if (!validation.valid) {
       return res.status(400).json({
         success: false,
-        message: "Candidate already exists for this position",
+        message: validation.message,
       });
     }
 
-    const candidate = await Candidate.create({
-      fullName,
-      party,
-      position,
-      manifesto,
-      image,
-    });
+    const candidate = await createCandidateService(req.body);
 
     return res.status(201).json({
       success: true,
-      message: "Candidate created successfully",
+      message: "Candidate ticket created successfully.",
       data: candidate,
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
