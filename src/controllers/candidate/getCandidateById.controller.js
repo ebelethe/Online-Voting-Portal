@@ -1,16 +1,13 @@
-import Candidate from "../../models/candidate.model.js";
+import { getCandidateByIdService } from "../../modules/candidate/candidateService.module.js";
 
-// Get Candidate By ID
 export const getCandidateById = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const candidate = await Candidate.findById(id);
+    const candidate = await getCandidateByIdService(req.params.id);
 
     if (!candidate) {
       return res.status(404).json({
         success: false,
-        message: "Candidate not found",
+        message: "Candidate ticket not found.",
       });
     }
 
@@ -18,6 +15,7 @@ export const getCandidateById = async (req, res) => {
       success: true,
       data: candidate,
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,

@@ -2,37 +2,54 @@ import mongoose from "mongoose";
 
 const candidateSchema = new mongoose.Schema(
   {
-    fullName: {
+    primaryCandidate: {
       type: String,
-      required: true,
+      required: [true, "Primary candidate is required"],
+      trim: true,
+    },
+
+    runningMate: {
+      type: String,
+      required: [true, "Running mate is required"],
       trim: true,
     },
 
     party: {
-      type: String,
-      required: true,
-      trim: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Party",
+      required: [true, "Party is required"],
     },
 
-    position: {
-      type: String,
-      required: true,
-      trim: true,
+    election: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Election",
+      required: [true, "Election is required"],
     },
 
     manifesto: {
       type: String,
-      required: true,
+      required: [true, "Manifesto is required"],
       trim: true,
     },
 
-    image: {
-      type: String,
-      default: "",
+    isActive: {
+      type: Boolean,
+      default: true,
     },
   },
   {
     timestamps: true,
+  }
+);
+
+// A party can only have one ticket in an election
+candidateSchema.index(
+  {
+    election: 1,
+    party: 1,
+  },
+  {
+    unique: true,
   }
 );
 
