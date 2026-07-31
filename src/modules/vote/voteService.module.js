@@ -13,11 +13,13 @@ export const castVoteService = async ( voterId, electionId, partyId) => {
   if (!election) {
     throw new Error("Election not found.");
   }
+if (election.status === "draft") {
+    throw new Error("Voting has not started for this election.");
+}
 
-  if (election.status !== "active") {
-    throw new Error("This election is not active.");
-  }
-
+if (election.status === "closed") {
+    throw new Error("Voting has ended for this election.");
+}
   // Find candidate ticket
   const candidate = await Candidate.findOne({election: electionId, party: partyId, isActive: true,});
 
@@ -49,6 +51,7 @@ export const getElectionResultsService = async (electionId) => {
   if (!election) {
     throw new Error("Election not found.");
   }
+  
 
   // Get all votes for this election
   const votes = await Vote.find({ election: electionId,}).populate({
@@ -94,12 +97,51 @@ export const getElectionResultsService = async (electionId) => {
 
   // Sort highest to lowest
   results.sort((a, b) => b.votes - a.votes);
+  // Add ranking
+let currentRank = 1;
+
+results.forEach((result, index) => {
+
+    if (
+        index > 0 &&
+        result.votes < results[index - 1].votes
+    ) {
+        currentRank = index + 1;
+    }
+
+    result.rank = currentRank;
+});
+
+// Detect tie
+let winnerDeclared = false;
+let winner = null;
+let tiedCandidates = [];
+
+if (results.length > 0) {
+
+    const highestVotes = results[0].votes;
+
+    tiedCandidates = results.filter(
+        (candidate) => candidate.votes === highestVotes
+    );
+
+    if (
+        election.status === "closed" &&
+        tiedCandidates.length === 1
+    ) {
+        winnerDeclared = true;
+        winner = tiedCandidates[0];
+    }
+}
 
   return {
     election,
     totalVotes,
     results,
-  };
+    winnerDeclared,
+    winner,
+    tiedCandidates,
+};
 };
 
 //Voter can see thier vote
@@ -151,7 +193,7 @@ export const getVoteStatisticsService = async () => {
         totalParties,
         totalElections,
         activeElections,
-        completedElections,
+        closedElections,
         totalCandidateTickets,
     };
 };

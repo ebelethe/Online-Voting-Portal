@@ -1,35 +1,31 @@
 import { getElectionResultsService } from "../../modules/vote/voteService.module.js";
 
 export const getElectionResults = async (req, res) => {
-  try {
-    const { electionId } = req.params;
+    try {
 
-    const results = await getElectionResultsService(electionId);
+        const { electionId } = req.params;
 
-    // Declare winner only when election is completed
-    let winner = null;
+        const results = await getElectionResultsService(electionId);
 
-    if (
-      results.election.status === "closed" &&
-      results.results.length > 0
-    ) {
-      winner = results.results[0];
+        return res.status(200).json({
+            success: true,
+            message: "Election results retrieved successfully.",
+            data: {
+                election: results.election,
+                totalVotes: results.totalVotes,
+                winnerDeclared: results.winnerDeclared,
+                winner: results.winner,
+                tiedCandidates: results.tiedCandidates,
+                results: results.results
+            }
+        });
+
+    } catch (error) {
+
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        });
+
     }
-
-    return res.status(200).json({
-      success: true,
-      message: "Election results retrieved successfully.",
-      data: {
-        election: results.election,
-        totalVotes: results.totalVotes,
-        results: results.results,
-        winner,
-      },
-    });
-  } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
 };
