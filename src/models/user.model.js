@@ -18,6 +18,15 @@ const userSchema=new mongoose.Schema(
             type:String,
             required: [true, "Password is required"],
         },
+        passwordResetToken: {
+            type: String,
+            defaul:null,
+        },
+        passwordResetExpires: {
+            type: Date,
+            default: null,
+        },
+
         role: {
             type:String,
             enum: ["admin", "voter"],

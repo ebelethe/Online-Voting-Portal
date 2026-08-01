@@ -1,6 +1,7 @@
 import express from "express";
-import cors from "cors";  //allows my frontend to communicate with your backend  
+import cors from "cors";  //allows my frontend to communicate with your backend
 
+import errorHandler from "./middleware/error.middleware.js";  
 import authRoutes from "./routes/auth.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import voterRoutes from "./routes/voter.routes.js";
@@ -21,5 +22,6 @@ app.use("/api/candidate", candidateRoutes);
 app.use("/api/election", electionRoutes);
 app.use("/api/party", partyRoutes);
 app.use("/api/vote", voteRoutes);
+app.use(errorHandler);
 
 export default app;
