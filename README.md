@@ -1,4 +1,4 @@
-# Online Voting Portal Backend Documentation
+# Online Voting Portal
 
 
 # Project Overview
@@ -52,7 +52,6 @@ npm run dev
 Simon Ebelethe
 
 Backend Developer
-
 
 
 
