@@ -1,5 +1,6 @@
 import User from "../../models/user.model.js";
 import bcrypt from "bcrypt";
+import { sendWelcomeEmail } from "../../modules/email/registrationEmailService.module.js";
 
 
 export const registerUser=async (req, res)=>{
@@ -20,6 +21,9 @@ export const registerUser=async (req, res)=>{
             password:hashedPassword,
             role:"voter",
         });
+        //send welcome email
+        await sendWelcomeEmail(user.email, user.fullName);
+        
         res.status(201).json({success:true, message:"Resgistration successful",
             data:user,});
     } catch (error) {

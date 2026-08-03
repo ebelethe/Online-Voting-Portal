@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import User from "../../models/user.model.js";
 import { validateResetPasswordRequest, validateResetPassword, validateChangePassword } from "./passwordValidator.module.js";
 import {  } from "./passwordValidator.module.js";
+import { sendResetPasswordEmail } from "../email/passwordEmailService.module.js";
 
 export const requestResetPasswordService = async (email) => {
 
@@ -25,12 +26,12 @@ export const requestResetPasswordService = async (email) => {
     user.passwordResetExpires = Date.now() + (15 * 60 * 1000);
 
     await user.save();
+    await sendResetPasswordEmail(user.email, resetToken);
 
     return {
-        success: true,
-        message: "Password reset token generated successfully.",
-        resetToken
-    };
+    success: true,
+    message: "Password reset email sent successfully.",
+};
 };
 
 export const resetPasswordService = async (token, newPassword) => {
