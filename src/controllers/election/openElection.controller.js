@@ -1,4 +1,6 @@
 import Election from "../../models/election.model.js";
+import User from "../../models/user.model.js";
+import { sendElectionNotificationEmail } from "../../modules/email/notificationEmailService.module.js";
 
 export const openElection = async (req, res) => {
   try {
@@ -18,7 +20,7 @@ export const openElection = async (req, res) => {
         success: false,
         message: "Election is already active",
       });
-    }
+    }    
 
     if (election.status === "closed") {
       return res.status(400).json({
@@ -29,6 +31,22 @@ export const openElection = async (req, res) => {
 
     election.status = "active";
     await election.save();
+
+            
+// Get all registered voters
+      const voters = await User.find({ role: "voter" });
+
+// Send notification email to each voter
+      for (const voter of voters) {
+        await sendElectionNotificationEmail({
+        email: voter.email,
+        fullName: voter.fullName,
+        title: "Voting Has Started",
+        message: `Voting for "${election.title}" has started. You can now log in and cast
+         cast your vote before the election closes.`,
+    });
+  }
+
 
     return res.status(200).json({
       success: true,

@@ -2,8 +2,10 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import app from "./src/app.js";
 
+import path from "path";
+
 dotenv.config();
-//;
+
 const startServer =async ()=>{
     try{
              const PORT= process.env.PORT || 5000;
