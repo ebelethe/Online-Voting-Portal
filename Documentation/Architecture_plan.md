@@ -24,7 +24,6 @@ EMAIL_USER=your_email
 EMAIL_PASS=your_email_password
 
 
-
 # Features
 1. Authentication
 
@@ -401,7 +400,6 @@ Voting Started
 Election Closed
 
 
-
 # Security Implementation
 
 Explain:
@@ -442,6 +440,26 @@ Party
 
 Election
 
+
+# Testing
+
+The application was tested using Postman to verify:
+
+Authentication endpoints
+
+Authorization
+
+Election management
+
+Candidate management
+
+Political party management
+
+Voting workflow
+
+Election result retrieval
+
+Email notification workflow
 
 
 # Future Improvements
@@ -502,4 +520,6 @@ MongoDB Atlas
 ↓
 
 Nodemailer SMTP
+
+
 
