@@ -16,7 +16,7 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-         console.log(`Online Voting Portal is connected to Mongodb Community Serverr Locally`);
+         console.log(`Online Voting Portal is connected to database successfully and running on port ${PORT}`);
     } catch (error) {
         console.error('Failed to start server:', error);
         process.exit(1); 
