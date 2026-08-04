@@ -130,32 +130,6 @@ CORS configuration
 Environment variable management
 
 
-# Technologies Used
-
-The project was developed using the following technologies:
-
-Node.js
-
-Express.js
-
-MongoDB
-
-Mongoose
-
-JSON Web Token (JWT)
-
-Nodemailer
-
-Helmet
-
-Express Rate Limit
-
-bcrypt
-
-dotenv
-
-
-
 # Project Structure
 
 Online-Voting-Portal/
@@ -476,9 +450,7 @@ Future improvements planned for the project include:
 
  5. Frontend integration.
 
- 6. Deployment optimization.
-
- 7.  Performance improvements.
+ 6.  Performance improvements.
 
 
   1. Voter Card Verification
@@ -511,7 +483,7 @@ Frontend
 
 ↓
 
-Express API
+Render (Express API)
 
 ↓
 

@@ -6,7 +6,7 @@ The Online Voting Portal Backend API provides RESTful endpoints for authenticati
 
 # Base URL
 Development: http://localhost:5000/api
-Production: https://your-domain/api
+Production: https://online-voting-portal-p9fd.onrender.com/api
 
 # Authentication
 Use 'Authorization: Bearer <JWT_TOKEN>' for protected endpoints.
@@ -85,7 +85,8 @@ Error:
 }
 
 # Testing
-All endpoints were verified using Postman during development.
+All endpoints were verified using Postman during development.Due to project time constraints, no postman 
+collection was created and added.
 
 # Future Improvements
-Voter Card verification, cloud storage, SMS notifications, audit logs, frontend integration, deployment optimization.
+Voter Card verification, cloud storage, SMS notifications, audit logs, frontend integration.
