@@ -7,6 +7,24 @@ import Party from "../../models/party.model.js";
 
 
 export const castVoteService = async ( voterId, electionId, partyId) => {
+
+  const voter = await User.findById(voterId);
+
+  if (!voter) {
+    const error = new Error("Voter not found.");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  // Check voter verification status
+  if (voter.voterVerificationStatus !== "verified") {
+    const error = new Error(
+      "You must complete voter verification before voting."
+    );
+    error.statusCode = 403;
+    throw error;
+  }
+  
   // Check election
   const election = await Election.findById(electionId);
 

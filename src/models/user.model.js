@@ -18,6 +18,21 @@ const userSchema=new mongoose.Schema(
             type:String,
             required: [true, "Password is required"],
         },
+        voterCardId:{
+            type: String,
+            unique: true,
+            sparse: true,
+            trim:true,
+        },
+        voterVerificationStatus:{
+            type: String,
+            enum: ["pending", "verified", "rejected"],
+            default: "pending"
+        },
+        voterVerificationDate:{
+            type:Date,
+            default:null
+        },
         passwordResetToken: {
             type: String,
             defaul:null,

@@ -17,6 +17,6 @@ router.get("/results/:electionId", authenticate, getElectionResults);
 //voters can see thier own vote history
 router.get("/my-vote", authenticate, authorize("voter"), getMyVote);
 //admin dashboard for voting statistics where admin click vote ended and the winner automatically displayed the winner
-router.get("/statistics", authenticate, authorize("admin"), getVoteStatistics);
+router.get("/statistics", authenticate, authorize("admin", "voter"), getVoteStatistics);
 
 export default router;
