@@ -20,14 +20,14 @@ app.use(cors());
 app.use(express.json());
 app.use(helmet());
 
-app.use("/api/auth", authRoutes);
-app.use("/api/admin", adminRoutes);
-app.use("/api/voter", voterRoutes);
-app.use("/api/candidate", candidateRoutes);
-app.use("/api/election", electionRoutes);
-app.use("/api/party", partyRoutes);
-app.use("/api/vote", voteRoutes);
-app.use("/api/verification", verificationRoutes)
+app.use("/auth", authRoutes);
+app.use("/admin", adminRoutes);
+app.use("/voter", voterRoutes);
+app.use("/candidate", candidateRoutes);
+app.use("/election", electionRoutes);
+app.use("/party", partyRoutes);
+app.use("/vote", voteRoutes);
+app.use("/verification", verificationRoutes)
 app.use(errorHandler);
 
 export default app;

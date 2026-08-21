@@ -440,7 +440,7 @@ Email notification workflow
 
 Future improvements planned for the project include:
 
- 1. Voter Card verification.
+ 1. Real Voter Card verification.
 
  2. Cloud storage for uploaded files.
 
@@ -453,28 +453,13 @@ Future improvements planned for the project include:
  6.  Performance improvements.
 
 
-  1. Voter Card Verification
-
-A voter verification system will be introduced to improve election integrity and reduce duplicate registrations and voting.
+  1. Real Voter Card Verification
+  The voterRegistryProvider and face provider i built so far are mock/test providers.
+  for a real election deployment, those must be replaced with an officially authorized voter-registry
+  integration and a properly vetted identity/liveness provier.
 
 Planned improvements include:
-
-Require every voter to provide a valid Voter Card ID during account registration.
-
-Restrict each Voter Card ID to a single user account.
-
 Allow users who forget their registered email address to verify their identity using their Voter Card ID before updating or resetting their email address.
-
-Require voters to provide the following information before casting a vote:
-
-Voter Card ID
-
-Election ID
-
-Party ID
-
-
-
 This additional verification process will strengthen the security and credibility of the voting process.
 
 # Deployment Architecture

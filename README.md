@@ -32,7 +32,6 @@ The online voting portal backend is deployed on Render and uses MongoDB Atlas as
 # Documentation
 Check the documentation folder contains API Documentation, System Architecture and Developer Guide.
 
-
 # Technologies Used
 The project was developed using the following technologies:
 
@@ -60,7 +59,7 @@ dotenv
 
 
 # Future Improvements
-Voter Card verification, cloud storage, SMS notifications, audit logs, frontend integration and service refactoring. check the documentation folder for more.
+Real Voter Card verification, cloud storage, SMS notifications, audit logs, frontend integration and service refactoring. check the documentation folder for more.
 
 # Installation Guide
 

@@ -9,6 +9,11 @@ const mockVoters = [
     fullName: "Jane Doe",
     dateOfBirth: "1997-08-15",
   },
+  {
+    voterCardId: "TEST-VIN-003",
+    fullName: "Oke Micheal",
+    dateOfBirth: "1997-08-02",
+  },
 ];
 
 export const verifyVoterWithRegistry = async ({
