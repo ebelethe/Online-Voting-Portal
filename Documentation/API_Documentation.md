@@ -6,7 +6,7 @@ The Online Voting Portal Backend API provides RESTful endpoints for authenticati
 
 # Base URL
 Development: http://localhost:5000/api
-Production: https://your-domain/api
+Production: https://online-voting-portal-p9fd.onrender.com/api
 
 # Authentication
 Use 'Authorization: Bearer <JWT_TOKEN>' for protected endpoints.
@@ -14,9 +14,12 @@ Use 'Authorization: Bearer <JWT_TOKEN>' for protected endpoints.
 # Authentication Endpoints
 POST /auth/register
 POST /auth/login
-POST /auth/forgot-password
-POST /auth/reset-password/:token
-PATCH /auth/change-password
+POST /auth/reset-password/request
+POST /auth/reset-password
+PUT /auth/change-password
+
+# Admin Endpoints
+GET/admin/dashboard
 
 # Election Endpoints
 POST /election
@@ -26,29 +29,41 @@ PATCH /election/:id
 PATCH /election/open/:id
 PATCH /election/close/:id
 DELETE /election/:id
+POST /election/:electionId/vote
+GET /election/:electionId/results
+Returns live election results.
 
 # Candidate Endpoints
-POST /candidate
-GET /candidate
-GET /candidate/:id
-PATCH /candidate/:id
-DELETE /candidate/:id
-POST /candidate/upload
+POST/candidate
+PUT/candidate/:id
+DELETE/candidate/:id
+GET/candidate 
+GET/candidate/:id
 
-# Political Party Endpoints
+# Party Endpoints
 POST /party
 GET /party
 GET /party/:id
-PATCH /party/:id
+PUT /party/:id
 DELETE /party/:id
 
-# Voting Endpoints
-POST /vote
-Authenticated voters can cast one vote in an open election.
+# Voter Endpoints
+GET/voter
+GET/voter/:id
+PUT/voter/:id
+DELETE/voter/:id
 
-# Election Results
-GET /results/:electionId
-Returns live election results.
+# Vote Endpoints
+POST /vote
+GET/vote/my-vote
+GET/vote/statistics
+Authenticated voters can cast one vote in an open election.
+voters can see thier own vote history
+Admin dashboard for voting statistics where admin click vote ended and the winner automatically displayed the winner
+
+# Verification Endpoint
+POST/verification/voter-id
+POST/verifacaition/face
 
 # Email Notifications
 Automatic emails are sent for registration, password reset, election creation, voting commencement, and election closure.
@@ -85,7 +100,22 @@ Error:
 }
 
 # Testing
-All endpoints were verified using Postman during development.
+All endpoints were verified using Postman during development.Due to project time constraints, no postman 
+collection was created and added.
 
 # Future Improvements
-Voter Card verification, cloud storage, SMS notifications, audit logs, frontend integration, deployment optimization.
+ 
+Future improvements planned for the project include:
+
+ 1. Real Voter Card verification.
+
+ 2. Cloud storage for uploaded files.
+
+ 3. SMS notifications.
+
+ 4. Audit logging.
+
+ 5. Frontend integration.
+
+ 6.  Performance improvements.
+

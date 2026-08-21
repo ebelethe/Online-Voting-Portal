@@ -11,13 +11,13 @@ export const castVote = async (req, res) => {
         message: validation.message,
       });
     }
-
-    const { election, party } = req.body;
+    const { electionId } = req.params;
+    const { partyId } = req.body;
 
     const vote = await castVoteService(
       req.user.id,
-      election,
-      party
+      electionId,
+      partyId
     );
 
     return res.status(201).json({

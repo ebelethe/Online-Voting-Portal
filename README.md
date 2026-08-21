@@ -23,11 +23,43 @@ Rate Limiting
 Helmet
 CORS
 
+# Live API
+check the API Documentation
+
+# Deployment
+The online voting portal backend is deployed on Render and uses MongoDB Atlas as the production database.
+
 # Documentation
 Check the documentation folder contains API Documentation, System Architecture and Developer Guide.
 
+# Technologies Used
+The project was developed using the following technologies:
+
+Node.js
+
+Express.js
+
+MongoDB Atlas
+
+Mongoose
+
+Render
+
+JSON Web Token (JWT)
+
+Nodemailer
+
+Helmet
+
+Express Rate Limit
+
+bcrypt
+
+dotenv
+
+
 # Future Improvements
-Voter Card verification, cloud storage, SMS notifications, audit logs, frontend integration and service refactoring. check the documentation folder for more.
+Real Voter Card verification, cloud storage, SMS notifications, audit logs, frontend integration and service refactoring. check the documentation folder for more.
 
 # Installation Guide
 
@@ -47,11 +79,14 @@ cd online-voting-portal
 npm run dev
 
 
-# Author
+# Author Information
 
 Simon Ebelethe
 
 Backend Developer
+
+Email:ebelethes@gmail.com
+github: http://github.com/ebelethe
 
 
 

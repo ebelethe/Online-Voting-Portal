@@ -438,3 +438,18 @@ Test all implemented features.
 Write meaningful commit messages.
 
 Keep pull requests focused on a single feature or bug fix.
+
+16. Production Deployment
+
+Hosting Platform: Render
+
+Database: MongoDB Atlas
+
+Runtime: Node.js
+
+Environment Variables:
+
+ MONGO_URI
+ JWT_SECRET
+ EMAIL_USER
+ EMAIL_PASS

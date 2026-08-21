@@ -10,6 +10,8 @@ import { updateElection } from "../controllers/election/updateElection.controlle
 import { deleteElection } from "../controllers/election/deleteElection.controller.js";
 import { openElection } from "../controllers/election/openElection.controller.js";
 import { closeElection } from "../controllers/election/closeElection.controller.js";
+import { castVote } from "../controllers/vote/castVote.controller.js";
+import { getElectionResults } from "../controllers/election/getElectionResults.controller.js";
 
 const router = express.Router();
 
@@ -26,5 +28,12 @@ router.delete("/:id", authenticate, authorize("admin"), deleteElection);
 router.patch("/:id/open", authenticate, authorize("admin"), openElection);
 
 router.patch("/:id/close", authenticate, authorize("admin"), closeElection);
+
+// Only voters can vote
+router.post("/:electionId/vote", authenticate, authorize("voter"), castVote);
+
+// result live everyone can see the live result as voters are casting their votes
+router.get("/:electionId/results", authenticate, getElectionResults);
+
 
 export default router;

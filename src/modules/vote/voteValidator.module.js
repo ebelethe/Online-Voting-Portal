@@ -1,10 +1,10 @@
 export const validateVote = (data) => {
-  const { election, party } = data;
+  const { partyId } = data;
 
-  if (!election || !party) {
+  if (!partyId) {
     return {
       valid: false,
-      message: "Election and Party are required.",
+      message: "partyId is required.",
     };
   }
 
