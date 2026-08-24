@@ -1,7 +1,7 @@
 import User from "../../models/user.model.js";
 import bcrypt from "bcrypt";
 import { sendWelcomeEmail } from "../../modules/email/registrationEmailService.module.js";
-
+import { createAuditLog } from "../../modules/auditLog/auditLogService.module.js";
 
 export const registerUser=async (req, res)=>{
     try {
@@ -21,6 +21,19 @@ export const registerUser=async (req, res)=>{
             password:hashedPassword,
             role:"voter",
         });
+
+        await createAuditLog({
+            userId: user._id,
+            action: "USER_REGISTERED",
+            resource: "User",
+            resourceId: user._id,
+            description: "User registered successfully.",
+            ipAddress: req.ip,
+            userAgent: req.get("User-Agent")
+    
+        });
+
+
         //send welcome email
         await sendWelcomeEmail(user.email, user.fullName);
         

@@ -2,6 +2,7 @@ import User from "../../models/user.model.js";
 import { validateVoterVerification } from "./verificationValidator.module.js";
 import { verifyVoterWithRegistry } from "./VoterRegistryProvider.module.js";
 import { verifyVoterFace } from "./FaceVerificationProvider.module.js";
+import { createAuditLog } from "../auditLog/auditLogService.module.js";
 
 export const verifyVoterIdentity = async (userId, data) => {
 
@@ -73,6 +74,16 @@ export const verifyVoterIdentity = async (userId, data) => {
 
   await user.save();
 
+    await createAuditLog({
+    userId: user._id,
+    action: "Voter_Id_verified",
+    resource: "Voter_Card_Id",
+    resourceId: voterCardId._id,
+    description: "Identity verified. Proceed to face verification",
+    ipAddress: req.ip,
+    userAgent: req.get("User-Agent")
+    });
+
   return {
     success: true,
     message: "Identity verified. Proceed to face verification.",
@@ -135,6 +146,17 @@ export const completeVoterVerification = async (userId, data) => {
   user.voterVerificationDate = new Date();
 
   await user.save();
+  
+    await createAuditLog({
+    userId: user._id,
+    action: "Face_verified",
+    resource: "User",
+    resourceId: user._id,
+    description: "Voter verification completed successfully",
+    ipAddress: req.ip,
+    userAgent: req.get("User-Agent")
+    });
+
 
   return {
     success: true,

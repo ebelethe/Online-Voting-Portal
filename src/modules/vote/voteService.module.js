@@ -57,8 +57,21 @@ if (election.status === "closed") {
   }
 
   // Save vote
-  const vote = await Vote.create({voter: voterId, election: electionId, party: partyId, candidate: candidate._id,});
-
+  const vote = await Vote.create({
+    voter: voterId, 
+    election: electionId,
+     party: partyId, 
+     candidate: candidate._id,});
+    //create audit log after sucessful vote
+        await createAuditLog({
+        userId: voter._id,
+        action: "Vote_Cast",
+        resource: "Election",
+        resourceId: election._id,
+        description: "User successfully cast a vote",
+        ipAddress: req.ip,
+        userAgent: req.get("User-Agent")
+        });
   return vote;
 };
 

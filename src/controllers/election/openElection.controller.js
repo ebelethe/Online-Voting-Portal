@@ -1,6 +1,7 @@
 import Election from "../../models/election.model.js";
 import User from "../../models/user.model.js";
 import { sendElectionNotificationEmail } from "../../modules/email/notificationEmailService.module.js";
+import { createAuditLog } from "../../modules/auditLog/auditLogService.module.js";
 
 export const openElection = async (req, res) => {
   try {
@@ -31,6 +32,17 @@ export const openElection = async (req, res) => {
 
     election.status = "active";
     await election.save();
+
+    await createAuditLog({
+      userId: user._id,
+      action: "Election opened",
+      resource: "Election",
+      resourceId: election._id,
+      description: "Election opened successfully",
+      ipAddress: req.ip,
+      userAgent: req.get("User-Agent")
+      });
+
 
             
 // Get all registered voters

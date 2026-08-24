@@ -9,10 +9,16 @@ const mockVoters = [
     fullName: "Jane Doe",
     dateOfBirth: "1997-08-15",
   },
+  
   {
     voterCardId: "TEST-VIN-003",
     fullName: "Oke Micheal",
     dateOfBirth: "1997-08-02",
+  },
+  {
+    voterCardId: "TEST-VIN-004",
+    fullName: "Micheal Oke",
+    dateOfBirth: "1998-08-02",
   },
 ];
 
