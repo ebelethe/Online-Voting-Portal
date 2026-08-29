@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import User from "../../models/user.model.js";
+import { createAuditLog } from "../../modules/auditLog/auditLogService.module.js";
 
 export const loginUser=async (req,res)=>{
     try{
@@ -27,9 +28,20 @@ export const loginUser=async (req,res)=>{
         expiresIn: "1d",
     }
 );
+    await createAuditLog({
+    userId: user._id,
+    action: "USER_LOGIN",
+    resource: "User",
+    resourceId: user._id,
+    description: "User logged in successfully.",
+    ipAddress: req.ip,
+    userAgent: req.get("User-Agent")
+    });
+
 return res.status(200).json ({
-    success:true, message:"login successful", token})
-}catch (error) {
+    success:true, message:"login successful", user, token})
+} catch (error) {
     res.status(500).json({success:false, message:error.message})
 }
+
 }

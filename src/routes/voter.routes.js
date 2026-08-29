@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/", authenticate,
   authorize("admin"),getAllVoters);
 router.get("/:id", authenticate,
-    authorize("admin"),getVoterById);
+    authorize("admin", "voter"),getVoterById);
 
 router.put("/:id",authenticate,
   authorize("admin"),updateVoter);

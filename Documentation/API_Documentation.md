@@ -22,48 +22,46 @@ PUT /auth/change-password
 GET/admin/dashboard
 
 # Election Endpoints
-POST /election
-GET /election
-GET /election/:id
-PATCH /election/:id
-PATCH /election/open/:id
-PATCH /election/close/:id
-DELETE /election/:id
-POST /election/:electionId/vote
-GET /election/:electionId/results
-Returns live election results.
+POST /election ##Only admin 
+GET /election ##Voter and admin can view all elections details
+GET /election/:id ##voter and admin can view a particular election details
+PATCH /election/:id ##only admin
+PATCH /election/open/:id #only admin
+PATCH /election/close/:id #only admin
+DELETE /election/:id ##only admin
+POST /election/:electionId/vote ##Only voter can cast a vote
+GET /election/:electionId/results ##both voter and admin can view the live results of a particular
+election.
 
 # Candidate Endpoints
-POST/candidate
-PUT/candidate/:id
-DELETE/candidate/:id
-GET/candidate 
-GET/candidate/:id
+POST/candidate #only admin
+PUT/candidate/:id #only admin
+DELETE/candidate/:id #Only admin
+GET/candidate ## voter and admim can see all candidetes with thier registered party details and election details.
+GET/candidate/:id ##voter and admin can see only specfic candidate with thier registered party details and election details.
 
 # Party Endpoints
-POST /party
-GET /party
-GET /party/:id
-PUT /party/:id
-DELETE /party/:id
+POST /party #admin only
+GET /party #voter and admin can see all registered parties
+GET /party/:id #voter and admin can see specific party only
+PUT /party/:id #admin only
+DELETE /party/:id #admin only
 
 # Voter Endpoints
-GET/voter
-GET/voter/:id
-PUT/voter/:id
-DELETE/voter/:id
+GET/voter ##admin dashboard
+GET/voter/:id 
+PUT/voter/:id ##admin dashboard
+DELETE/voter/:id ##admin dashboard
 
 # Vote Endpoints
-POST /vote
-GET/vote/my-vote
-GET/vote/statistics
-Authenticated voters can cast one vote in an open election.
-voters can see thier own vote history
+GET/vote/my-vote  ##Only voters can see thier own vote history
+GET/vote/statistics ##admin dashboard for voting statistics where admin click vote ended and the winner automatically displayed the winner
+
 Admin dashboard for voting statistics where admin click vote ended and the winner automatically displayed the winner
 
 # Verification Endpoint
-POST/verification/voter-id
-POST/verifacaition/face
+POST/verification/voter-id ##voter dashboard
+POST/verifacaition/face #voter dashboard
 
 # Email Notifications
 Automatic emails are sent for registration, password reset, election creation, voting commencement, and election closure.

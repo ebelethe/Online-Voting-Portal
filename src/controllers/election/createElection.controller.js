@@ -1,6 +1,7 @@
 import Election from "../../models/election.model.js";
 import User from "../../models/user.model.js";
 import { sendElectionNotificationEmail } from "../../modules/email/notificationEmailService.module.js";
+import { createAuditLog } from "../../modules/auditLog/auditLogService.module.js";
 
 export const createElection = async (req, res) => {
   try {
@@ -34,7 +35,15 @@ for (const voter of voters) {
         message: `A new election "${election.title}" has been created. Stay tuned for the voting schedule.`,
     });
   }
-    
+        await createAuditLog({
+        userId: user._id,
+        action: "Election Created",
+        resource: "Election",
+        resourceId: election._id,
+        description: "Election created successfully",
+        ipAddress: req.ip,
+        userAgent: req.get("User-Agent")
+        });
 
     return res.status(201).json({
       success: true,

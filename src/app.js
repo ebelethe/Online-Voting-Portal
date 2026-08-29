@@ -11,7 +11,7 @@ import electionRoutes from "./routes/election.routes.js";
 import partyRoutes from "./routes/party.routes.js";
 import voteRoutes from "./routes/vote.routes.js";
 import verificationRoutes from "./routes/verification.routes.js";
-
+import auditLogRoutes from "./routes/auditLog.routes.js";
 
 
 const app=express();
@@ -28,6 +28,8 @@ app.use("/election", electionRoutes);
 app.use("/party", partyRoutes);
 app.use("/vote", voteRoutes);
 app.use("/verification", verificationRoutes)
+app.use("/audit-logs", auditLogRoutes)
+
 app.use(errorHandler);
 
 export default app;
