@@ -14,7 +14,6 @@ import verificationRoutes from "./routes/verification.routes.js";
 import auditLogRoutes from "./routes/auditLog.routes.js";
 
 
-
 const app=express();
 
 app.use(cors());

@@ -17,9 +17,9 @@ const router = express.Router();
 
 router.post("/", authenticate, authorize("admin"), createElection);
 
-router.get("/", authenticate, authorize("admin"), getAllElections);
+router.get("/", authenticate, authorize("admin", "voter"), getAllElections);
 
-router.get("/:id", authenticate, authorize("admin"), getElectionById);
+router.get("/:id", authenticate, authorize("voter", "admin"), getElectionById);
 
 router.put("/:id", authenticate, authorize("admin"), updateElection);
 
@@ -33,7 +33,7 @@ router.patch("/:id/close", authenticate, authorize("admin"), closeElection);
 router.post("/:electionId/vote", authenticate, authorize("voter"), castVote);
 
 // result live everyone can see the live result as voters are casting their votes
-router.get("/:electionId/results", authenticate, getElectionResults);
+router.get("/:electionId/results", authenticate, authorize("admin", "voter"), getElectionResults);
 
 
 export default router;

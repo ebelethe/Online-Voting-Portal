@@ -1,13 +1,13 @@
 import { rateLimit } from "express-rate-limit";
 
 export const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
+    windowMs: 1 * 60 * 1000, // 15 minutes
 
-    max: 5,
+    max: 1,
 
     message: {
         success: false,
-        message: "Too many requests. Please try again after 15 minutes.",
+        message: "Too many requests. Please try again after 1 minutes.",
     },
 
     standardHeaders: true,
